@@ -6,7 +6,14 @@ use std::{
 };
 use serde::{Deserialize, Serialize};
 
-// Config structure
+// 👇 Struct baru untuk entri RPP
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct CustomRppEntry {
+    pub apk: String,
+    pub rp: String,
+}
+
+// 👇 ModConfig
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ModConfig {
     #[serde(rename = "Nohurtcam")]
@@ -27,9 +34,8 @@ pub struct ModConfig {
     #[serde(rename = "classic_skins")]
     pub classic_skins: bool,
     
-    // You can add more fields as needed
-    // #[serde(rename = "CustomField")]
-    // pub custom_field: bool,
+    #[serde(rename = "custom_rpp")]
+    pub custom_rpp: Vec<CustomRppEntry>, // ⬅️ ARRAY OBJECT di sini
 }
 
 impl Default for ModConfig {
@@ -41,18 +47,24 @@ impl Default for ModConfig {
             java_clouds: false,
             java_cubemap: false,
             classic_skins: false,
-            // custom_field: false,
+            custom_rpp: vec![
+                CustomRppEntry {
+                    apk: "assets/gui".into(),
+                    rp: "gui/".into(),
+                },
+            ],
         }
     }
 }
 
-// Global config instance
+// 🧩 Global config instance
 static CONFIG: OnceLock<ModConfig> = OnceLock::new();
 
-// Config file path
+// 🧩 Config file path
 const CONFIG_DIR: &str = "/storage/emulated/0/games/origin_mods";
 const CONFIG_FILE: &str = "/storage/emulated/0/games/origin_mods/config.json";
 
+// 🧩 Init config
 pub fn init_config() {
     let config = load_or_create_config();
     CONFIG.set(config).expect("Failed to set config");
@@ -63,13 +75,11 @@ pub fn get_config() -> &'static ModConfig {
 }
 
 fn load_or_create_config() -> ModConfig {
-    // Create directory if it doesn't exist
     if let Err(e) = fs::create_dir_all(CONFIG_DIR) {
         log::warn!("Failed to create config directory: {}", e);
         return ModConfig::default();
     }
 
-    // Try to load existing config
     if Path::new(CONFIG_FILE).exists() {
         match load_config() {
             Ok(config) => {
@@ -82,7 +92,6 @@ fn load_or_create_config() -> ModConfig {
         }
     }
 
-    // Create default config file
     let default_config = ModConfig::default();
     if let Err(e) = save_config(&default_config) {
         log::warn!("Failed to save default config: {}", e);
@@ -97,7 +106,6 @@ fn load_config() -> Result<ModConfig, Box<dyn std::error::Error>> {
     let mut file = File::open(CONFIG_FILE)?;
     let mut contents = String::new();
     file.read_to_string(&mut contents)?;
-    
     let config: ModConfig = serde_json::from_str(&contents)?;
     Ok(config)
 }
@@ -110,7 +118,7 @@ fn save_config(config: &ModConfig) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-// Helper functions to check individual settings
+// Helper functions
 pub fn is_no_hurt_cam_enabled() -> bool {
     get_config().no_hurt_cam
 }
@@ -135,7 +143,7 @@ pub fn is_classic_skins_enabled() -> bool {
     get_config().classic_skins
 }
 
-// You can add more helper functions for other config values
-// pub fn is_custom_field_enabled() -> bool {
-//     get_config().custom_field
-// }
+// 🔎 Tambahan helper opsional:
+pub fn get_custom_rpp_entries() -> &'static [CustomRppEntry] {
+    &get_config().custom_rpp
+}

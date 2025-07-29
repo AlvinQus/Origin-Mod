@@ -347,7 +347,7 @@ pub(crate) unsafe fn open(
         apk: "gui/" -> pack: "gui/",
         apk: "skin_packs/persona/" -> pack: "persona/",
         apk: "renderer/" -> pack: "renderer/",
-        /*apk: "resource_packs/" -> pack: "resources/",*/
+        apk: "resource_packs/vanilla/" -> pack: "vanilla/",
     };
     
     for replacement in replacement_list {

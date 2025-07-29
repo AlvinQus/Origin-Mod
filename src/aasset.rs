@@ -204,7 +204,7 @@ pub(crate) unsafe fn open(
     };
 
     // Check if this is splashes.json and replace it with custom content
-    if os_filename == "splashes.json" {
+    /*if os_filename == "splashes.json" {
         log::info!("Intercepting splashes.json with custom content");
         let buffer = CUSTOM_SPLASHES_JSON.as_bytes().to_vec();
         let mut wanted_lock = WANTED_ASSETS.lock().unwrap();
@@ -219,7 +219,7 @@ pub(crate) unsafe fn open(
         let mut wanted_lock = WANTED_ASSETS.lock().unwrap();
         wanted_lock.insert(AAssetPtr(aasset), Cursor::new(buffer));
         return aasset;
-    }
+    }*/
 
     // Check if this is a particle JSON file and particles disabler is enabled
     if is_particle_json_file(c_path) {
@@ -347,7 +347,7 @@ pub(crate) unsafe fn open(
         apk: "gui/" -> pack: "gui/",
         apk: "skin_packs/persona/" -> pack: "persona/",
         apk: "renderer/" -> pack: "renderer/",
-        apk: "resource_packs/" -> pack: "resources/",
+        /*apk: "resource_packs/" -> pack: "resources/",*/
     };
     
     for replacement in replacement_list {

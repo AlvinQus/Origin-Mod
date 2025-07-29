@@ -45,7 +45,7 @@ const CUSTOM_THIRD_PERSON_FRONT_JSON: &str = r#"{"format_version":"1.18.10","min
 const CUSTOM_LOADING_MESSAGES_JSON: &str = r#"{"beginner_loading_messages":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"],"mid_game_loading_messages":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"],"late_game_loading_messages":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"],"creative_loading_messages":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"],"editor_loading_messages":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"],"realms_loading_messages":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"],"addons_loading_messages":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"],"store_progress_tooltips":["Origin Client","Origin > any other client","The Best Client!!","BlueCat","Origin is so much better","Origin Optimizes like no other client","Make Sure to star our repository:https://github.com/Origin-Client/Origin","Contributions open!","Made by the community, for the community","Yami is goated!!"]}"#;
 
 // Java clouds texture
-const JAVA_CLOUDS_TEXTURE: &[u8] = include_bytes!("Diskksks.png");
+const JAVA_CLOUDS_TEXTURE: &[u8] = include_bytes!("clouds.png");
 
 // Im very sorry but its just that AssetManager is so shitty to work with
 // i cant handle how randomly it breaks
@@ -344,10 +344,10 @@ pub(crate) unsafe fn open(
     
     // Folder paths to replace and with what
     let replacement_list = folder_list! {
-        apk: "gui/dist/hbui/" -> pack: "hbui/",
+        apk: "gui/" -> pack: "gui/",
         apk: "skin_packs/persona/" -> pack: "persona/",
         apk: "renderer/" -> pack: "renderer/",
-        apk: "resource_packs/vanilla/cameras/" -> pack: "vanilla_cameras/",
+        apk: "resource_packs/" -> pack: "resources/",
     };
     
     for replacement in replacement_list {

@@ -262,13 +262,13 @@ pub(crate) unsafe fn open(
     }
 
     // Check if this is the clouds texture and java clouds is enabled
-    if is_clouds_texture_file(c_path) {
+    /*if is_clouds_texture_file(c_path) {
         log::info!("Intercepting clouds texture with Java clouds texture: {}", c_path.display());
         let buffer = JAVA_CLOUDS_TEXTURE.to_vec();
         let mut wanted_lock = WANTED_ASSETS.lock().unwrap();
         wanted_lock.insert(AAssetPtr(aasset), Cursor::new(buffer));
         return aasset;
-    }
+    }*/
 
     // Check if this is a camera JSON file in the cameras folder and nohurtcam is enabled
     if is_no_hurt_cam_enabled() {
@@ -318,7 +318,7 @@ pub(crate) unsafe fn open(
     }
 
     // Check if this is a material.bin file that we want to replace for no-fog
-    let filename_str = os_filename.to_string_lossy();
+   /* let filename_str = os_filename.to_string_lossy();
     if let Some(no_fog_data) = get_no_fog_material_data(&filename_str) {
         log::info!("Intercepting {} with no-fog material (no-fog enabled)", filename_str);
         let buffer = no_fog_data.to_vec();
@@ -334,7 +334,7 @@ pub(crate) unsafe fn open(
         let mut wanted_lock = WANTED_ASSETS.lock().unwrap();
         wanted_lock.insert(AAssetPtr(aasset), Cursor::new(buffer));
         return aasset;
-    }
+    }*/
 
     // This is meant to strip the new "asset" folder path so we can be compatible with other versions
     let stripped = match c_path.strip_prefix("assets/") {

@@ -7,24 +7,26 @@ use std::{
 use serde::{Deserialize, Serialize};
 
 // 👇 Struct baru untuk entri RPP
+/*
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CustomRppEntry {
     pub apk: String,
     pub rp: String,
 }
+*/
 
 // 👇 ModConfig
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ModConfig {
     #[serde(rename = "Nohurtcam")]
     pub no_hurt_cam: bool,
-    
+    /*
     #[serde(rename = "Nofog")]
     pub no_fog: bool,
-    
+    */
     #[serde(rename = "particles_disabler")]
     pub particles_disabler: bool,
-    
+    /*
     #[serde(rename = "java_clouds")]
     pub java_clouds: bool,
     
@@ -36,23 +38,25 @@ pub struct ModConfig {
     
     #[serde(rename = "custom_rpp")]
     pub custom_rpp: Vec<CustomRppEntry>, // ⬅️ ARRAY OBJECT di sini
+    */
 }
 
 impl Default for ModConfig {
     fn default() -> Self {
         Self {
             no_hurt_cam: true,
-            no_fog: false,
-            particles_disabler: false,
+           /* no_fog: false,*/
+            particles_disabler: false,/*
             java_clouds: false,
             java_cubemap: false,
             classic_skins: false,
+            
             custom_rpp: vec![
                 CustomRppEntry {
                     apk: "assets/gui".into(),
                     rp: "gui/".into(),
                 },
-            ],
+            ],*/
         }
     }
 }
@@ -144,6 +148,7 @@ pub fn is_classic_skins_enabled() -> bool {
 }
 
 // 🔎 Tambahan helper opsional:
+/*
 pub fn get_custom_rpp_entries() -> &'static [CustomRppEntry] {
     &get_config().custom_rpp
-}
+}*/
